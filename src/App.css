@@ -1,0 +1,35 @@
+@import "./styles/header-style.css";
+@import "./styles/navbar-style.css";
+@import "./styles/main-style.css";
+@import "./styles/aside-style.css";
+@import "./styles/checkoutstye.css";
+@import "./styles/add-data-style.css";
+
+.app {
+  min-width: 600px;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin: 0 auto;
+  background-color: rgba(190, 195, 202, 0.3);
+}
+.nav-main {
+  flex-basis: 70%;
+  display: flex;
+}
+.hide {
+  display: none;
+}
+@media screen and (max-width: 768px) {
+  .wrapper {
+    flex-direction: column;
+  }
+  .nav-main {
+    flex-basis: 100%;
+    padding: 0;
+    margin: 0;
+  }
+}

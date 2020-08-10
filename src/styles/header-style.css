@@ -1,0 +1,129 @@
+@font-face {
+  font-family: "Airbnb Cereal App Book";
+  src: url("../assets/fonts/AirbnbCerealBold.woff");
+}
+@font-face {
+  font-family: "Airbnb Cereal App Light";
+  src: url("../assets/fonts/AirbnbCerealLight.woff");
+}
+
+/* HEADER */
+header {
+  display: grid;
+  grid-template-columns: 7% auto 30%;
+  grid-template-rows: 4.5vw;
+  text-align: center;
+  z-index: 1;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  margin: 0 auto;
+}
+header .hamburger-menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  background-color: #ffffff;
+  box-shadow: 0px 4px 1px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+}
+.hamburger-menu img {
+  width: 30%;
+  margin: 0;
+}
+header .title-foods {
+  font-style: medium;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: #ffffff;
+  box-shadow: 0px 4px 1px rgba(0, 0, 0, 0.25);
+}
+header .title-foods img {
+  flex-basis: 15%;
+  width: 40%;
+  height: 40%;
+}
+.title-foods h6 {
+  font-family: "Airbnb Cereal App Book";
+  font-size: 2vw;
+  flex-basis: 85%;
+}
+header .title-cart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+  box-shadow: 0px 4px 1px rgba(0, 0, 0, 0.25);
+}
+.title-cart h6 {
+  font-size: 1.5vw;
+  font-family: "Airbnb Cereal App Book";
+  /* font-style: medium; */
+}
+.title-cart .quantity {
+  background-color: #57cad5;
+  color: white;
+  border-radius: 30px;
+  padding: 0px 8px;
+}
+/* HEADER History page*/
+#header-history {
+  display: grid;
+  grid-template-columns: 7% 93%;
+  grid-template-rows: 5vw;
+  text-align: center;
+  z-index: 1;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  margin: 0 auto;
+}
+#header-history .hamburger-menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  background-color: #ffffff;
+  box-shadow: 0px 4px 1px rgba(0, 0, 0, 0.25);
+}
+#header-history .history {
+  font-family: "Airbnb Cereal App Book";
+  font-size: 30px;
+  font-style: medium;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: #ffffff;
+  box-shadow: 0px 4px 1px rgba(0, 0, 0, 0.25);
+}
+
+#header-history .history h5 {
+  flex-basis: 85%;
+}
+#header-history .history img {
+  flex-basis: 15%;
+  width: 50%;
+  height: 50%;
+}
+
+@media screen and (max-width: 768px) {
+  header {
+    grid-template-columns: 10% auto 30%;
+    grid-template-rows: 10vw;
+  }
+  .title-foods h6 {
+    font-family: "Airbnb Cereal App Book";
+    font-size: 4vw;
+    flex-basis: 85%;
+  }
+  header .title-foods img {
+    flex-basis: 15%;
+    width: 40%;
+    height: 40%;
+  }
+  .title-cart h6 {
+    font-size: 4vw;
+  }
+}
