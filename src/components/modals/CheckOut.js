@@ -27,25 +27,21 @@ class CheckOut extends React.Component {
               <div className="col col-cashier">Cashier : Pevita Pearce</div>
               <div className="col"></div>
             </div>
-            <div className="row">
-              <div className="col">Coffe Latte 1x</div>
-              <div className="col">Rp. 15.000</div>
-            </div>
-            <div className="row">
-              <div className="col">Black Forest 1x</div>
-              <div className="col">Rp. 30.000</div>
-            </div>
-            <div className="row">
-              <div className="col">Salmon Truffle Teriyaki 1x</div>
-              <div className="col">Rp. 60.000</div>
-            </div>
+            {this.context.state.productChecked.map((item)=>{
+              return(
+                <div className="row">
+                  <div className="col">{item.product_name} {item.numOrder}x</div>
+                  <div className="col">Rp.{item.product_price} </div>
+                </div>
+              )
+            })}
             <div className="row">
               <div className="col">Ppn 10%</div>
-              <div className="col">Rp. 10.500</div>
+              <div className="col">Rp.{0.1*this.context.state.totalPriceOrder} </div>
             </div>
             <div className="row">
               <div className="col"></div>
-              <div className="col">Total: Rp. 115.500</div>
+              <div className="col">Total: Rp.{0.1*Number(this.context.state.totalPriceOrder)+Number(this.context.state.totalPriceOrder)} </div>
             </div>
             <div className="row">
               <div className="col">Payment: Cash</div>

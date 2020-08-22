@@ -4,19 +4,19 @@ import { Mcontext } from "./MyProvider";
 class Aside extends React.Component {
   static contextType = Mcontext;
   render() {
-    console.log(this.context.state.numberProductOrdered);
+    // console.log(this.context.state.numberProductOrdered);
     return (
       <div className="sidebar">
         <div className="aside-items">
-          <h5 className="detail-order">Detail Order</h5>
+          <h5 className="detail-order" id="order">Detail Order</h5>
           {this.context.state.productChecked.map((item, index) => {
             return (
               <div key={index} id="item">
                 <div id="col1">
-                  <img src={item.product_image} alt="" />
+                  <img src={this.context.state.productChecked[index].product_image} alt="" />
                 </div>
                 <div id="col2">
-                  <h6>{item.product_name}</h6>
+                  <h6>{this.context.state.productChecked[index].product_name}</h6>
                   <table>
                     <tbody>
                       <tr>
@@ -31,7 +31,8 @@ class Aside extends React.Component {
                           </button>
                         </td>
                         <td>
-                          {this.context.state.numberProductOrdered[index]}
+                          {/* <input id={item.product_id} type="number" placeholder={item.numOrder} onChange={this.context.handleInput}/> */}
+                          {item.numOrder}
                         </td>
                         <td>
                           <button
@@ -48,7 +49,7 @@ class Aside extends React.Component {
                   </table>
                 </div>
                 <div id="col3">
-                  Rp. {this.context.state.priceProductOrdered[index]}
+                  Rp. {this.context.state.productChecked[index].product_price}
                 </div>
               </div>
             );
@@ -67,7 +68,7 @@ class Aside extends React.Component {
           <button id="checkout" onClick={this.props.handleCheckOut}>
             Checkout
           </button>
-          <button id="cancel">Cancel</button>
+          <button id="cancel" onClick={this.context.handleCancelOrder}>Cancel</button>
         </div>
       </div>
     );

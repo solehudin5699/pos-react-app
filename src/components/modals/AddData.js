@@ -18,8 +18,8 @@ class AddData extends React.Component {
                   <div className="col-8"><input className="input-name" name="name" type="text"/></div>
               </div>
               <div className="row">
-                  <div class="col-4">Image</div>
-                  <div class="col-8"><input className="input-image" type="text" name="image"/></div>
+                  <div className="col-4">Image</div>
+                  <div className="col-8"><input className="input-image" type="text" name="image"/></div>
               </div>
               <div className="row">
                   <div className="col-4">Price</div>

@@ -1,14 +1,16 @@
 import React from "react";
 import axios from "axios";
 import update from "react-addons-update";
+require("dotenv").config();
 
 async function postOrder(productOrder, quality, total) {
   let body = {
     product_order: `${productOrder}`,
     quality_order: `${quality}`,
-    total_price: `${total}`,
+    total_price: total,
   };
-  let res = await axios.post("http://localhost:1000/order/add/", body);
+  // const postOrder = `${process.env.REACT_APP_API}/order/add`
+  let res = await axios.post("http://localhost:1000/order/add", body);
   console.log(res.data);
 }
 
@@ -19,28 +21,16 @@ class MyProvider extends React.Component {
     this.state = {
       products: [],
       productChecked: [],
-      numberChecked: 0,
 
-      priceProductOrdered: [],
       idProductOrdered: [],
-      nameProductOrdered: [],
-      numberProductOrdered: [],
       totalPriceOrder: 0,
-      isCheckOut: false,
+      keywordSearch:""
     };
     this.handleChange = this.handleChange.bind(this);
     this.changeNumberOrder = this.changeNumberOrder.bind(this);
+    this.handleInputSearchBar = this.handleInputSearchBar.bind(this);
+    this.handleInput = this.handleInput.bind(this);
   }
-  totalPriceOrder = () => {
-    if (this.state.numberChecked !== 0) {
-      let totalPrice = this.state.priceProductOrdered.reduce(
-        (total = 0, value) => {
-          return total + value;
-        }
-      );
-      this.setState({ totalPriceOrder: totalPrice });
-    }
-  };
   handleChange = (event) => {
     const target = event.target;
     const checked = target.checked;
@@ -49,56 +39,59 @@ class MyProvider extends React.Component {
       return item.product_id === value;
     });
     if (checked) {
-      this.state.productChecked.push(productChecked);
+      if(!this.state.productChecked.find(item=>{return item.product_id===value}))
+      {
+        this.state.productChecked.push({...productChecked,numOrder:1});
+      }
       this.state.idProductOrdered.push(
         this.state.productChecked.find((item) => {
           return item.product_id === value;
         }).product_id
       );
-      this.state.nameProductOrdered.push(
-        this.state.productChecked.find((item) => {
-          return item.product_id === value;
-        }).product_name
-      );
-      this.state.priceProductOrdered.push(
-        this.state.productChecked.find((item) => {
-          return item.product_id === value;
-        }).product_price
-      );
-      this.state.numberProductOrdered.push(1);
-      this.setState({ numberChecked: this.state.productChecked.length });
       this.setState({
         totalPriceOrder:
           this.state.totalPriceOrder + Number(productChecked.product_price),
       });
     } else {
-      this.state.nameProductOrdered.splice(
-        this.state.idProductOrdered.indexOf(value),
-        1
-      );
-      this.state.priceProductOrdered.splice(
-        this.state.idProductOrdered.indexOf(value),
-        1
-      );
-      this.state.numberProductOrdered.splice(
-        this.state.idProductOrdered.indexOf(value),
-        1
+      if(this.state.productChecked.length===0){
+        this.setState({totalPriceOrder:0})
+      }else{
+        this.setState({
+          totalPriceOrder:
+            this.state.totalPriceOrder - Number(this.state.productChecked[this.state.idProductOrdered.indexOf(value)].product_price),
+        });
+      }
+      this.state.productChecked.splice(
+        this.state.idProductOrdered.indexOf(value),1
       );
       this.state.idProductOrdered.splice(
         this.state.idProductOrdered.indexOf(value),
         1
       );
-      this.state.productChecked.splice(
-        this.state.productChecked.indexOf(productChecked),
-        1
-      );
-      this.setState({ numberChecked: this.state.productChecked.length });
-      this.setState({
-        totalPriceOrder:
-          this.state.totalPriceOrder - Number(productChecked.product_price),
-      });
     }
   };
+  // handleInput=event=>{
+  //   let target = event.target;
+  //   let value = Number(target.value);
+  //   let id = target.id;
+  //   let focus=target.focus;
+  //   if(focus){
+  //     this.setState(
+  //       update(this.state, {
+  //         productChecked: {
+  //           [this.state.idProductOrdered.indexOf(id)]: {
+  //             $set: 
+  //             {...this.state.productChecked[this.state.idProductOrdered.indexOf(id)], 
+  //               numOrder:Number(value), 
+  //               product_price:Number(this.state.products.find(item=>{return item.product_id===this.state.productChecked[this.state.idProductOrdered.indexOf(id)].product_id}).product_price)*Number(this.state.productChecked[this.state.idProductOrdered.indexOf(id)].numOrder)
+  //             }
+  //           },
+  //         },
+          
+  //       })
+  //     );
+  //   }
+  // }
   changeNumberOrder = (event) => {
     let target = event.target;
     let value = target.value;
@@ -106,97 +99,110 @@ class MyProvider extends React.Component {
     if (id === "plus") {
       this.setState(
         update(this.state, {
-          numberProductOrdered: {
+          productChecked: {
             [value]: {
-              $set: Number(this.state.numberProductOrdered[value]) + 1,
+              $set: 
+              {...this.state.productChecked[value], 
+                numOrder:Number(this.state.productChecked[value].numOrder)+1, 
+                product_price:Number(this.state.products.find(item=>{return item.product_id===this.state.productChecked[value].product_id}).product_price)*Number(this.state.productChecked[value].numOrder+1)
+              }
             },
           },
-          priceProductOrdered: {
-            [value]: {
-              $set:
-                Number(this.state.productChecked[value].product_price) *
-                (Number(this.state.numberProductOrdered[value]) + 1),
-            },
-          },
+          
         })
       );
-      let total = this.state.priceProductOrdered.reduce((total, value) => {
-        return total + value;
-      });
+      
       this.setState({
         totalPriceOrder:
-          total + Number(this.state.productChecked[value].product_price),
+          Number(this.state.totalPriceOrder) +
+          Number(this.state.products.find(item=>{return item.product_id===this.state.productChecked[value].product_id}).product_price),
       });
     } else if (
       id === "min" &&
-      Number(this.state.numberProductOrdered[value]) >= 2
+      Number(this.state.productChecked[value].numOrder) >= 2
     ) {
       this.setState(
         update(this.state, {
-          numberProductOrdered: {
+          productChecked: {
             [value]: {
-              $set: Number(this.state.numberProductOrdered[value]) - 1,
-            },
-          },
-          priceProductOrdered: {
-            [value]: {
-              $set:
-                Number(this.state.productChecked[value].product_price) *
-                (Number(this.state.numberProductOrdered[value]) - 1),
+              $set: 
+              {...this.state.productChecked[value], 
+                numOrder:Number(this.state.productChecked[value].numOrder)-1, 
+                product_price:Number(this.state.products.find(item=>{return item.product_id===this.state.productChecked[value].product_id}).product_price)*Number(this.state.productChecked[value].numOrder-1)
+              }
             },
           },
         })
       );
-      let total = this.state.priceProductOrdered.reduce((total, value) => {
-        return total + value;
-      });
       this.setState({
         totalPriceOrder:
-          total - Number(this.state.productChecked[value].product_price),
+          Number(this.state.totalPriceOrder)-Number(this.state.products.find(item=>{return item.product_id===this.state.productChecked[value].product_id}).product_price),
       });
     }
   };
 
-  handleCheckOut = () => {
-    this.setState({ isCheckOut: !this.state.isCheckOut });
+  handleCancelOrder = () => {
+    this.setState({
+      productChecked: [],
+      idProductOrdered: [],
+      totalPriceOrder: 0 });
   };
-  componentDidMount() {
-    axios
-      .get("http://localhost:1000/products")
+  componentDidMount=()=>{
+    // axios
+      // .get("http://localhost:1000/products")
+      axios
+      .get(`http://localhost:1000/products/search?name=${this.state.keywordSearch}&sortBy=product_id&orderBy=ASC&limit=7&page=1`)
       .then((res) => {
         console.log(res);
-        const products = res.data.listProduct;
+        const products = res.data.data;
         this.setState({ products });
       })
       .catch((err) => console.log(err));
   }
-  handlePostOrder = () => {
-    postOrder(
-      this.state.nameProductOrdered,
-      this.state.numberProductOrdered,
-      this.state.totalPriceOrder
-    );
-    window.alert("Thanks for Ordering");
-    window.location.reload(false);
-  };
+  handleInputSearchBar=(event)=>{
+    const target = event.target;
+    const value = target.value;
+    this.setState({ keywordSearch: value });
+    if(event.key==="Enter"){
+      this.componentDidMount()
+    }else{
+      this.componentDidMount()
+    }
+  }
 
+  handlePostOrder = () => {
+    let nameProduct=this.state.productChecked.map(item=>{return item.product_name});
+    let numberOrder=this.state.productChecked.map(item=>{return item.numOrder});
+    let total=Number(this.state.totalPriceOrder)+0.1*Number(this.state.totalPriceOrder);
+
+    try {
+      postOrder(
+        nameProduct,
+        numberOrder,
+        total
+      );
+    } catch (err) {
+      console.log(err);
+    }
+  };
   render() {
+    console.log(this.state.productChecked)
     return (
       <Mcontext.Provider
         value={{
           state: this.state,
           handleChange: this.handleChange,
-          handleCheckOut: this.handleCheckOut,
+          handleCancelOrder: this.handleCancelOrder,
           changeNumberOrder: this.changeNumberOrder,
-          totalPriceOrder: this.totalPriceOrder,
+          // handleInput: this.handleInput,
           handlePostOrder: this.handlePostOrder,
-        }}
-      >
+          handleSearch:this.componentDidMount,
+          handleInputSearchBar:this.handleInputSearchBar
+        }}>
         {this.props.children}
       </Mcontext.Provider>
     );
   }
 }
 
-// export default MyProvider;
 export { MyProvider, Mcontext };

@@ -1,7 +1,8 @@
 {
-    "eslint.run": "onSave",
-    "eslint.format.enable": true,
-    "eslint.lintTask.enable": true,
-    "eslint.debug": true,
-    "editor.formatOnSave": true
+    "prettier.jsxBracketSameLine": true,
+    "prettier.jsxSingleQuote": true,
+    "prettier.vueIndentScriptAndStyle": true,
+    "prettier.withNodeModules": true,
+    "editor.formatOnSave": true,
+    "javascript.format.semicolons": "insert"
 }

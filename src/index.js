@@ -2,14 +2,18 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.css';
-import App from './App';
+// import $ from 'jquery';
+// import Popper from 'popper.js';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
+// import App from './App';
+import AppRouter from './AppRouter'
 // import App from './App';
 import * as serviceWorker from './serviceWorker';
 // import './bootstrap/bootstrap/js/bootstrap.min.js';
 // import './bootstrap/js/jquery-1.10.2.min.js';
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <AppRouter />
   </React.StrictMode>,
   document.getElementById('root')
 );

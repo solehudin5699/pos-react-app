@@ -8,17 +8,15 @@ class Aside extends React.Component {
   render() {
     return (
       <div>
-        {/* <aside className="sidebar"> */}
-        {this.context.state.numberChecked ? (
-          <OrderItem handleCheckOut={this.props.handleCheckOut} />
+        {this.context.state.productChecked.length ? (
+          <OrderItem handleCheckOut={this.props.handleCheckOut}/>
         ) : (
-          <aside className="sidebar">
-            <img src={foodrestaurant} alt="" />
+          <aside className='sidebar'>
+            <img src={foodrestaurant} alt='' />
             <h3>Your Cart is Empty </h3>
             <p> Please add some items from the menu </p>
           </aside>
         )}
-        {/* </aside> */}
       </div>
     );
   }

@@ -6,30 +6,42 @@
 @import "./styles/add-data-style.css";
 
 .app {
-  min-width: 600px;
+  /* min-width: 600px; */
+  margin: 0 auto;
+  width: 100vw;
+  padding: 0;
+  /* height: 100%; */
 }
 
 .wrapper {
   display: flex;
   flex-direction: row;
   width: 100%;
-  margin: 0 auto;
+  /* height: 100%; */
+  height: 89.5vh;
+  /* height: 100vh; */
+  /* margin: 0 auto; */
+  /* overflow: hidden; */
+
   background-color: rgba(190, 195, 202, 0.3);
 }
 .nav-main {
   flex-basis: 70%;
   display: flex;
 }
-.hide {
-  display: none;
-}
+
 @media screen and (max-width: 768px) {
   .wrapper {
     flex-direction: column;
+    height: 100%;
+    width: 100vw;
+    padding: 0;
   }
   .nav-main {
     flex-basis: 100%;
     padding: 0;
     margin: 0;
+    text-align: justify;
+    justify-items: center;
   }
 }
