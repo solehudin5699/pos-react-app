@@ -2,6 +2,7 @@
 .main {
   /* width: 63vw; */
   /* width: auto; */
+  /* flex-basis: 100%; */
   width: 100%;
   padding-top: 2%;
   overflow-y: scroll;
@@ -123,9 +124,9 @@
   .main {
     flex-basis: 100%;
     padding: 2% 2% 0 2%;
-    /* width: 100vw; */
+    width: 100%;
     /* margin: 0 10px; */
-    justify-self: center;
+    /* justify-self: center; */
     /* overflow-x: hidden; */
   }
   /* .row {

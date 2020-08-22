@@ -29,7 +29,7 @@ class MyProvider extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.changeNumberOrder = this.changeNumberOrder.bind(this);
     this.handleInputSearchBar = this.handleInputSearchBar.bind(this);
-    this.handleInput = this.handleInput.bind(this);
+    // this.handleInput = this.handleInput.bind(this);
   }
   handleChange = (event) => {
     const target = event.target;
