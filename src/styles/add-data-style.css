@@ -14,7 +14,8 @@
 
 /* Modal Content/Box */
 .modal-add-data .content-wrapper {
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(400px, 600px);
   justify-content: center;
   align-items: center;
   width: 100%;
@@ -25,9 +26,7 @@
   background-color: #fefefe;
   padding: 20px;
   border: 1px solid #888;
-  width: 35vw;
 }
-
 .modal-add-data .row {
   padding: 3px;
   margin: 3px;
@@ -58,16 +57,22 @@
   width: 50%;
 }
 .modal-add-data .btn-cancel {
+  background-color: #f24f8a;
+  border-style: none;
+  color: white;
   border-radius: 7px;
   margin: 0;
-  width: 47%;
+  flex-basis: 47%;
   font-size: 15px;
   height: 40px;
 }
 .modal-add-data .btn-add {
+  background-color: #57cad5;
+  border-style: none;
+  color: white;
   border-radius: 7px;
   margin: 0;
-  width: 47%;
+  flex-basis: 47%;
   font-size: 15px;
   height: 40px;
 }

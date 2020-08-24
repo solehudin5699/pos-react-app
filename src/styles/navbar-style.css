@@ -1,7 +1,8 @@
 /* NAVIGASI */
 .navbar {
-  width: 7vw;
-  /* height: 100%; */
+  /* width: 7vw; */
+  width: 7%;
+  min-height: 300px;
   min-width: 6.8vw;
   max-width: 6.8vw;
   display: flex;
@@ -21,14 +22,13 @@
 
 @media screen and (max-width: 768px) {
   .navbar {
-    /* display: none; */
     flex-basis: 10%;
     display: flex;
     background-color: #ffffff;
     box-shadow: 4px 0px 3px rgba(0, 0, 0, 0.25);
     flex-direction: column;
     align-items: center;
-    /* max-width: 100px; */
+    /* width: 10%; */
   }
   .navbar img {
     width: 100%;

@@ -14,6 +14,17 @@ async function postOrder(productOrder, quality, total) {
   console.log(res.data);
 }
 
+// async function postProducts(id, name, price, stock, image, category_id) {
+//   let body = {
+//     id, name, price, stock, image, category_id
+//   };
+//   // const postOrder = `${process.env.REACT_APP_API}/order/add`
+//   let res = await axios.post("http://localhost:1000/products/post", body);
+//   window.alert("Add product is success.");
+//   window.location.reload(false);
+//   console.log(res.data);
+// }
+
 const Mcontext = React.createContext();
 class MyProvider extends React.Component {
   constructor(props) {

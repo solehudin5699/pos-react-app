@@ -10,7 +10,7 @@
 /* HEADER */
 header {
   display: grid;
-  grid-template-columns: 7vw 63vw 30vw;
+  grid-template-columns: 7% 63% 30%;
   grid-template-rows: 5vw;
   text-align: center;
   z-index: 1;
@@ -19,7 +19,20 @@ header {
   width: 100%;
   margin: 0 auto;
 }
-header .hamburger-menu {
+.header-history {
+  display: grid;
+  grid-template-columns: 7% 93%;
+  grid-template-rows: 5vw;
+  text-align: center;
+  z-index: 1;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  margin: 0 auto;
+}
+
+header .hamburger-menu,
+.header-history .hamburger-menu {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -31,6 +44,26 @@ header .hamburger-menu {
 .hamburger-menu img {
   width: 30%;
   margin: 0;
+}
+
+.header-history .title {
+  font-style: medium;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  box-shadow: 0px 4px 1px rgba(0, 0, 0, 0.25);
+  font-size: 1.1em;
+  color: black;
+  /* line-height: ; */
+  /* margin: 0px auto; */
+  /* padding: 5px; */
+  /* width: 100%; */
+  /* box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.7); */
+  /* display: flex; */
+  /* text-align: right; */
+  /* top: 15px; */
 }
 /*SEARCHBAR*/
 .search {
@@ -168,7 +201,7 @@ header .title-cart {
 
 @media screen and (max-width: 768px) {
   header {
-    grid-template-columns: 10vw 60vw 30vw;
+    grid-template-columns: 10% 60% 30%;
     /* grid-template-columns: 10% auto 30%; */
     grid-template-rows: 10vw;
   }

@@ -8,7 +8,7 @@
 .app {
   /* min-width: 600px; */
   margin: 0 auto;
-  width: 100vw;
+  width: 100%;
   padding: 0;
   /* height: 100%; */
 }
@@ -16,9 +16,23 @@
 .wrapper {
   display: flex;
   flex-direction: row;
-  width: 100vw;
+  width: 100%;
   /* height: 100%; */
   height: 89.5vh;
+  /* height: 100vh; */
+  /* margin: 0 auto; */
+  /* overflow: hidden; */
+
+  background-color: rgba(190, 195, 202, 0.3);
+}
+.wrapper-history {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  background-color: rgba(190, 195, 202, 0.3);
+  height: 89.5vh;
+  /* height: 100%; */
+  /* height: 89.5vh; */
   /* height: 100vh; */
   /* margin: 0 auto; */
   /* overflow: hidden; */
@@ -34,15 +48,17 @@
   .wrapper {
     flex-direction: column;
     height: 100%;
-    width: 100vw;
+    width: 100%;
     padding: 0;
   }
   .nav-main {
     flex-basis: 100%;
     padding: 0;
     margin: 0;
-    text-align: justify;
+    width: 100%;
+    /* text-align: justify; */
     justify-items: center;
     /* width: 100vw; */
+    /* width: auto; */
   }
 }

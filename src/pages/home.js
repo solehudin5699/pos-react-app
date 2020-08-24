@@ -10,7 +10,7 @@ import "../App.css";
 
 class Home extends React.Component {
   state = {
-    isShow: false,
+    isShow: true,
     isCheckOut: false,
     isShowAddModal:false,
   };
@@ -25,12 +25,12 @@ class Home extends React.Component {
     this.setState({ isCheckOut: !this.state.isCheckOut });
   };
   handleWindowRefresh = () => {
-    window.alert("Thanks for Ordering");
     window.location.reload(false);
   };
   render() {
     return (
-      <div>
+      <>
+      {/* <div> */}
         {/* {this.state.isPrint?this.context.setState({productChecked:null}):null} */}
         <MyProvider>
           <div className="app">
@@ -58,7 +58,8 @@ class Home extends React.Component {
 
           </div>
         </MyProvider>
-      </div>
+      {/* </div> */}
+      </>
     );
   }
 }

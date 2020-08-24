@@ -8,6 +8,7 @@ class AddData extends React.Component {
       <div className="modal-add-data">
       <div className="content-wrapper">
           <div className="modal-content">
+              <form>
               <div className="row">
                   <div className="col-12">
                       <h4 >Add Items</h4>
@@ -31,19 +32,20 @@ class AddData extends React.Component {
                   <div className="col-8">
                       <select name="category" placeholder="Category" >
                           <optgroup label="Category">
-                              <option value="" selected>Category</option>
-                              <option value="">Other Category</option>
+                              <option value="1" selected>Makanan Khas Jawa Barat</option>
+                              <option value="2">Makanan Khas Banten</option>
                           </optgroup>
                       </select>
                   </div>
               </div>
               <div className="row">
                   <div className="col-6"></div>
-                  <div className="col-6 d-flex justify-content-between align-items-center pl-2 pr-2">
-                      <button id="cancel" className="btn-cancel" onClick={this.props.handleShowAddModal}>Cancel</button>
-                      <button id="add" className="btn-add" onClick={this.props.handleWindowRefresh}>Add</button>
+                  <div className="col-6 d-flex justify-content-between align-items-center align-items-center">
+                      <button className="btn-cancel" onClick={this.props.handleShowAddModal}>Cancel</button>
+                      <button className="btn-add" onClick={this.props.handleWindowRefresh}>Add</button>
                   </div>
               </div>
+              </form>
           </div>
       </div>
   </div>
