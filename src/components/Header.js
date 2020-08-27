@@ -1,4 +1,5 @@
 import React from "react";
+import {connect} from "react-redux";
 import logo from "../assets/icons/list.svg";
 import search from "../assets/icons/search.svg";
 import { Mcontext } from "./MyProvider";
@@ -28,7 +29,7 @@ class Header extends React.Component {
             <h6>
               Cart{" "}
               <span className='quantity'>
-                {this.context.state.productChecked.length}
+                {this.props.products.productsOrdered.length}
               </span>
             </h6>
           {/* </a> */}
@@ -37,4 +38,9 @@ class Header extends React.Component {
     );
   }
 }
-export default Header;
+
+const mapStateToProps=(state)=>{
+  const {products}=state;
+  return{ products }
+}
+export default connect(mapStateToProps)(Header);

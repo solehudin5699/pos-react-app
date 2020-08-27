@@ -1,14 +1,49 @@
 import React from "react";
-import { Mcontext } from "./MyProvider";
+// import { Mcontext } from "./MyProvider";
+import{connect} from "react-redux";
+import {getProductCreator, selectProductCreator} from "../redux/actions/products";
+import {requestProductsCreator} from "../redux/actions/requestProducts";
+import axios from "axios";
 require("dotenv").config();
 
 class Main extends React.Component {
-  static contextType = Mcontext;
+  constructor(props){
+    super(props);
+    this.state={
+      products:[]
+    }
+  }
+  componentDidMount=()=>{
+    let keyword="";
+    axios
+    .get(`http://localhost:1000/products/search?name=${keyword}&sortBy=product_id&orderBy=ASC&limit=7&page=1`)
+    .then((res) => {
+      console.log(res);
+      const products = res.data.data;
+      this.setState({ products });
+      this.props.getProduct(products)
+    })
+    .catch((err) => console.log(err));
+}
+// componentDidMount=async ()=>{
+//   try {
+//     await this.props.requestProducts();
+//     if(this.props.requestAPIProducts.data){
+//       this.props.getProduct(this.props.requestAPIProducts.data.data)
+//     }
+//   } catch (err){
+//     console.log(err)
+//   }
+  
+// }
+  // static contextType = Mcontext;
   render() {
+    console.log(this.props.products)
     return (
       <div className='main'>
         <div className='row'>
-          {this.context.state.products.map((product, index) => {
+          {/* {this.context.state.products.map((product, index) => { */}
+          {this.state.products.map((product, index) => {
             return (
               <div
                 key={index.toString()}
@@ -26,8 +61,9 @@ class Main extends React.Component {
                         type='checkbox'
                         value={product.product_id}
                         name={product.product_name}
-                        checked={this.context.state.productChecked.find(item=>{return item.product_id===product.product_id})?true:false}
-                        onChange={this.context.handleChange}
+                        onChange={(e)=>{this.props.selectProduct(e)}}
+                        checked={this.props.products.productsOrdered.find(item=>{return item.product_id===product.product_id})?true:false}
+                        
                       />
                       <span className='checkmark'></span>
                     </label>
@@ -48,4 +84,23 @@ class Main extends React.Component {
     );
   }
 }
-export default Main;
+
+const mapStateToProps=(state)=>{
+  const {products,requestAPIProducts} = state;
+  return {products, requestAPIProducts }
+};
+
+const mapDispatchToProps=(dispacth)=>{
+  return{
+    getProduct:(products)=>{
+      dispacth(getProductCreator(products))
+    },
+    selectProduct:(event)=>{
+      dispacth(selectProductCreator(event))
+    },
+    requestProducts:()=>{
+      dispacth(requestProductsCreator(""))
+    }
+  }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(Main);

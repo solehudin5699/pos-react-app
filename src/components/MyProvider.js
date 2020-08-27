@@ -40,7 +40,6 @@ class MyProvider extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.changeNumberOrder = this.changeNumberOrder.bind(this);
     this.handleInputSearchBar = this.handleInputSearchBar.bind(this);
-    // this.handleInput = this.handleInput.bind(this);
   }
   handleChange = (event) => {
     const target = event.target;
@@ -159,8 +158,6 @@ class MyProvider extends React.Component {
       totalPriceOrder: 0 });
   };
   componentDidMount=()=>{
-    // axios
-      // .get("http://localhost:1000/products")
       axios
       .get(`http://localhost:1000/products/search?name=${this.state.keywordSearch}&sortBy=product_id&orderBy=ASC&limit=7&page=1`)
       .then((res) => {
@@ -205,7 +202,6 @@ class MyProvider extends React.Component {
           handleChange: this.handleChange,
           handleCancelOrder: this.handleCancelOrder,
           changeNumberOrder: this.changeNumberOrder,
-          // handleInput: this.handleInput,
           handlePostOrder: this.handlePostOrder,
           handleSearch:this.componentDidMount,
           handleInputSearchBar:this.handleInputSearchBar

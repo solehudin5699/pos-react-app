@@ -1,5 +1,7 @@
 import React from "react";
 import { Mcontext } from "./MyProvider";
+import {connect} from "react-redux";
+import {cancelOrderCreator, changeQuantityCreator} from "../redux/actions/products";
 
 class Aside extends React.Component {
   static contextType = Mcontext;
@@ -9,14 +11,14 @@ class Aside extends React.Component {
       <div className="sidebar">
         <div className="aside-items">
           <h5 className="detail-order" id="order">Detail Order</h5>
-          {this.context.state.productChecked.map((item, index) => {
+          {this.props.products.productsOrdered.map((item, index) => {
             return (
               <div key={index} id="item">
                 <div id="col1">
-                  <img src={this.context.state.productChecked[index].product_image} alt="" />
+                  <img src={item.product_image} alt="" />
                 </div>
                 <div id="col2">
-                  <h6>{this.context.state.productChecked[index].product_name}</h6>
+                  <h6>{item.product_name}</h6>
                   <table>
                     <tbody>
                       <tr>
@@ -25,7 +27,7 @@ class Aside extends React.Component {
                             className="btn-num-order"
                             value={index}
                             id="min"
-                            onClick={this.context.changeNumberOrder}
+                            onClick={(e)=>this.props.changeQuantity(e)}
                           >
                             -
                           </button>
@@ -39,7 +41,7 @@ class Aside extends React.Component {
                             className="btn-num-order"
                             value={index}
                             id="plus"
-                            onClick={this.context.changeNumberOrder}
+                            onClick={(e)=>this.props.changeQuantity(e)}
                           >
                             +
                           </button>
@@ -49,7 +51,7 @@ class Aside extends React.Component {
                   </table>
                 </div>
                 <div id="col3">
-                  Rp. {this.context.state.productChecked[index].product_price}
+                  Rp. {this.props.products.productsOrdered[index].product_price}
                 </div>
               </div>
             );
@@ -62,17 +64,31 @@ class Aside extends React.Component {
               <p>*Belum termasuk PPN</p>
             </div>
             <div id="total-value">
-              <h6>Rp. {this.context.state.totalPriceOrder}*</h6>
+              <h6>Rp. {this.props.products.totalPrice}*</h6>
             </div>
           </div>
           <button id="checkout" onClick={this.props.handleCheckOut}>
             Checkout
           </button>
-          <button id="cancel" onClick={this.context.handleCancelOrder}>Cancel</button>
+          <button id="cancel" onClick={()=>this.props.cancelOrder()}>Cancel</button>
         </div>
       </div>
     );
   }
 }
 
-export default Aside;
+const mapStateToProps=(state)=>{
+  const {products} = state;
+  return{products}
+}
+const mapDispatchToProps=(dispatch)=>{
+  return{
+    changeQuantity:(event)=>{
+      dispatch(changeQuantityCreator(event))
+    },
+    cancelOrder:()=>{
+      dispatch(cancelOrderCreator())
+    }
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Aside);
