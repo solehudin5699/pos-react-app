@@ -4,21 +4,25 @@ import "./index.css";
 import "bootstrap/dist/css/bootstrap.css";
 // import $ from 'jquery';
 // import Popper from 'popper.js';
-import "bootstrap/dist/js/bootstrap.bundle.min";
+// import "bootstrap/dist/js/bootstrap.bundle.min";
+import 'react-toastify/dist/ReactToastify.css';
 // import App from './App';
 import AppRouter from "./AppRouter";
 // import Login from './pages/login'
-// import Dashboard from "./components/Dashboard";
+// import AddUser from "./components/modals/AddUser";
 import * as serviceWorker from "./serviceWorker";
 // import './bootstrap/bootstrap/js/bootstrap.min.js';
 // import './bootstrap/js/jquery-1.10.2.min.js';
-import {Provider} from 'react-redux'
-import store from "./redux/store"
+import {Provider} from 'react-redux';
+import {PersistGate} from "redux-persist/integration/react";
+import {store, persistor} from "./redux/store";
 
 const App=()=>{
   return(
     <Provider store={store}>
-      <AppRouter/>
+      <PersistGate loading={null} persistor={persistor}>
+        <AppRouter/>
+      </PersistGate>
     </Provider>
   );
 };

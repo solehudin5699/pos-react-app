@@ -11,7 +11,7 @@ class Navbar extends React.Component {
     <div className="navbar" style={{textAlign:"center"}}>
       <Link to="/"><img src={fork} alt="" /></Link>
       <Link to="/history" ><img src={clipboard} alt="" /></Link>
-      <img src={add} alt="" onClick={this.props.handleShowAddModal} />
+      <img src={add} alt="" onClick={this.props.handleAddModal} />
     </div>
     );
   }

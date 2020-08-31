@@ -1,4 +1,8 @@
 import React from "react";
+import {connect} from "react-redux";
+import {
+  validateTokenAPICreator
+} from "../redux/actions/auth";
 import { MyProvider} from "../components/MyProvider";
 import Header from "../components/Header";
 import Navbar from "../components/Navbar";
@@ -6,6 +10,8 @@ import Main from "../components/Main";
 import Aside from "../components/Aside";
 import CheckOut from "../components/modals/CheckOut";
 import AddData from "../components/modals/AddData";
+import Add from "../components/modals/Add";
+import AddUser from "../components/modals/AddUser";
 import "../App.css";
 
 class Home extends React.Component {
@@ -13,46 +19,65 @@ class Home extends React.Component {
     isShow: true,
     isCheckOut: false,
     isShowAddModal:false,
+    isAdd:false,
+    isAddUser:false,
   };
 
   handleHideShow = () => {
     this.setState({ isShow: !this.state.isShow });
   };
-  handleShowAddModal = () => {
+  handleAddUserModal = () => {
+    this.setState({ isAdd: false });
+    this.setState({ isAddUser: !this.state.isAddUser });
+  };
+  handleAddDataModal = () => {
+    this.setState({ isAdd: false });
     this.setState({ isShowAddModal: !this.state.isShowAddModal });
   };
   handleCheckOut = () => {
     this.setState({ isCheckOut: !this.state.isCheckOut });
   };
-  handleWindowRefresh = () => {
-    window.location.reload(false);
+  handleAddModal = () => {
+    this.setState({ isAdd: !this.state.isAdd });
   };
+  componentWillMount=()=>{
+    this.props.validateToken();
+  }
   render() {
     return (
       <>
-      {/* <div> */}
-        {/* {this.state.isPrint?this.context.setState({productChecked:null}):null} */}
+      
         <MyProvider>
           <div className="app">
             <Header hideShowFunction={this.handleHideShow} />
             <div className="wrapper">
               <div className="nav-main">
-                {this.state.isShow ? <Navbar handleShowAddModal={this.handleShowAddModal}/> : null}
+                {this.state.isShow ? <Navbar handleAddModal={this.handleAddModal}/> : null}
                 <Main />
               </div>
               <Aside handleCheckOut={this.handleCheckOut} />
             </div>
             {this.state.isCheckOut ? (
               <CheckOut
-                handleWindowRefresh={this.handleWindowRefresh}
                 handleCheckOut={this.handleCheckOut}
               />
             ) : null}
             
             {this.state.isShowAddModal ? (
               <AddData
-              handleWindowRefresh={this.handleWindowRefresh}
-              handleShowAddModal={this.handleShowAddModal}
+              handleAddDataModal={this.handleAddDataModal}
+              />
+            ) : null}
+            {this.state.isAddUser ? (
+              <AddUser
+              handleAddUserModal={this.handleAddUserModal}
+              />
+            ) : null}
+            {this.state.isAdd ? (
+              <Add
+              handleAddUserModal={this.handleAddUserModal}
+              handleAddDataModal={this.handleAddDataModal}
+              handleAddModal={this.handleAddModal}
               />
             ) : null}
 
@@ -63,4 +88,13 @@ class Home extends React.Component {
     );
   }
 }
-export default Home;
+// export default Home;
+
+const mapDispatchToProps = (dispacth) => {
+  return {
+    validateToken: () => {
+      dispacth(validateTokenAPICreator());
+    },
+  };
+};
+export default connect(null, mapDispatchToProps)(Home);

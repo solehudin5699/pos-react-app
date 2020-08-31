@@ -1,12 +1,11 @@
+//IMPORT LIBRARY
 import React from "react";
-import { Mcontext } from "./MyProvider";
 import {connect} from "react-redux";
+//IMPORT ACTIONS
 import {cancelOrderCreator, changeQuantityCreator} from "../redux/actions/products";
 
-class Aside extends React.Component {
-  static contextType = Mcontext;
+class OrderItem extends React.Component {
   render() {
-    // console.log(this.context.state.numberProductOrdered);
     return (
       <div className="sidebar">
         <div className="aside-items">
@@ -33,7 +32,6 @@ class Aside extends React.Component {
                           </button>
                         </td>
                         <td>
-                          {/* <input id={item.product_id} type="number" placeholder={item.numOrder} onChange={this.context.handleInput}/> */}
                           {item.numOrder}
                         </td>
                         <td>
@@ -91,4 +89,4 @@ const mapDispatchToProps=(dispatch)=>{
     }
   }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(Aside);
+export default connect(mapStateToProps, mapDispatchToProps)(OrderItem);

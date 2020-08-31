@@ -1,3 +1,5 @@
+import { getProductsAPI ,pending, fulfilled, rejected } from "../actions/actionTypes";
+
 const initialState = {
   data: [],
   error: "",
@@ -8,23 +10,23 @@ const initialState = {
 
 const requestProductsReducer = (prevState = initialState, action) => {
   switch (action.type) {
-    case "PENDING":
+    case getProductsAPI+pending:
       return {
         ...prevState,
         isPending: true,
       };
-    case "REJECTED":
+    case getProductsAPI+rejected:
       return {
         ...prevState,
         isRejected: true,
         error: action.payload,
         isPending: false,
       };
-    case "FULLFILLED":
+    case getProductsAPI+fulfilled:
       return {
         ...prevState,
         isFullFilled: true,
-        data: action.payload.data,
+        data: action.payload,
         isPending: false,
       };
     default:
