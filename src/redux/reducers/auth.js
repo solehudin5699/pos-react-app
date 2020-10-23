@@ -44,6 +44,7 @@ const authAPIReducer = (prevState = initialCart, action) => {
       } else {
         status = false;
       }
+      
       return {
         ...prevState,
         dataLogin: datalogin,

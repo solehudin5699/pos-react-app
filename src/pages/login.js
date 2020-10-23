@@ -30,7 +30,7 @@ const Login = (props) => {
       setLogin(false);
     }
   }, [login, formData, dispatch]);
-  console.log(formData);
+  // console.log(formData);
 
   return (
     <>
@@ -62,7 +62,7 @@ const Login = (props) => {
               </div>
               <div className={classes.line}>
                 <div className={classes.labelselect}>
-                  <select className={classes.select} name="level_id" onChange={(e)=>{return handleChange(e)}} value="1" >
+                  <select className={classes.select} name="level_id" onChange={(e)=>{return handleChange(e)}} >
                     <optgroup label="Login as..." >
                       <option value="1" >Admin</option>
                       <option value="2">Cashier</option>

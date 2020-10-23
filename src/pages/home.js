@@ -40,7 +40,7 @@ class Home extends React.Component {
   handleAddModal = () => {
     this.setState({ isAdd: !this.state.isAdd });
   };
-  componentWillMount=()=>{
+  componentDidMount=()=>{
     this.props.validateToken();
   }
   render() {

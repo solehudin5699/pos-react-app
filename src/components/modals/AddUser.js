@@ -45,7 +45,7 @@ const AddUser = (props)=>{
                 </div>
                 <div className="row">
                     <div className="col-4">Password</div>
-                    <div className="col-8"><input className="inputuser" type="text" name="password"  onChange={(e)=>handleChange(e)} /></div>
+                    <div className="col-8"><input className="inputuser" type="password" name="password"  onChange={(e)=>handleChange(e)} /></div>
                 </div>
                 <div className="row">
                     <div className="col-4">Category</div>

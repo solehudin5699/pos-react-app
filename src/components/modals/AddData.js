@@ -2,11 +2,12 @@ import React, { useState} from "react";
 import {useDispatch } from "react-redux";
 import {addProductsAPICreator} from "../../redux/actions/products";
 
+
 const AddData = (props)=> {
     // const [formData, updateFormData] = useState({});
     const [name, setName] = useState("");
     const [price, setPrice] = useState("");
-    const [image, setImage] = useState("");
+    const [image, setImage] = useState();
     const [category, setCategory] = useState(1);
     const dispatch = useDispatch();
 
@@ -27,23 +28,22 @@ const AddData = (props)=> {
         setCategory(content)
     }
 
-    const handleSubmit=()=>{
-        // e.preventDefault();
+    const handleSubmit=(e)=>{
+        e.preventDefault();
         let formData=new FormData()
         formData.append("name", name);
         formData.append("price", price);
         formData.append("image", image);
         formData.append("category_id", category);
         dispatch(addProductsAPICreator(formData))
-        // props.handleAddDataModal();
     }
     // console.log(formData);
     return (
       <div className="modal-add-data">
       <div className="content-wrapper">
           <div className="modal-content">
-              <form type="multipart/form-data" onSubmit={()=>{
-                  handleSubmit()
+              <form onSubmit={(e)=>{
+                  handleSubmit(e);props.handleAddDataModal()
               }}>
               <div className="row">
                   <div className="col-12">

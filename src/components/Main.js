@@ -23,11 +23,11 @@ class Main extends React.Component {
   };
 
   render() {
-    console.log(this.props.products.products);
+    // console.log(this.props.products.products);
     return (
       <div className='main' >
         <ToastContainer />
-        {this.props.products.isPostPending?<h3 style={{textAlign:"center"}}>Loading...</h3>:(this.props.products.products.length?<div className='row'>
+        {this.props.products.isPending?<h3 style={{textAlign:"center"}}>Loading...</h3>:(this.props.products.products.length?<div className='row'>
         {this.props.products.products.map((product, index) => {
             return (
               <div

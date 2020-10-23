@@ -194,7 +194,7 @@ class MyProvider extends React.Component {
     }
   };
   render() {
-    console.log(this.state.productChecked)
+    // console.log(this.state.productChecked)
     return (
       <Mcontext.Provider
         value={{
